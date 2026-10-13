@@ -1,6 +1,8 @@
-# personal settings and generated output – may contain real e-mail data
+# personal settings, saved passwords and generated output - may contain real e-mail data
 config.json
+credentials/
 Reports/
 *.csv
 *.xlsx
 *.msg
+*.eml

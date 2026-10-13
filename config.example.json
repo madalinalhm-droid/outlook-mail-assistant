@@ -1,5 +1,21 @@
 {
-  "_help": "Copy this file to config.json next to the script and edit it. Every setting is optional.",
+  "_help": "Copy this file to config.json next to the script and edit it, or let option 6 (setup) write it for you. Every setting is optional; without Sources the tool reads Outlook.",
+  "_help_sources": "Type: outlook | imap | folder | mbox. Passwords are never written here - setup stores them encrypted for your Windows user.",
+  "Sources": [
+    { "Type": "outlook" },
+    {
+      "Type": "imap",
+      "Name": "Gmail - office@example.com",
+      "Host": "imap.gmail.com",
+      "Port": 993,
+      "User": "office@example.com",
+      "Address": "office@example.com",
+      "SmtpHost": "smtp.gmail.com",
+      "SmtpPort": 587
+    },
+    { "Type": "folder", "Name": "Saved e-mails", "Path": "C:\\Mail\\Saved", "Recurse": false },
+    { "Type": "mbox", "Name": "Thunderbird", "Path": "C:\\Users\\you\\AppData\\Roaming\\Thunderbird\\Profiles\\xxxx.default\\Mail\\Local Folders\\Inbox" }
+  ],
   "Signature": "Your Name / Department",
   "Greeting": "Hello,",
   "Closing": "Best regards,",
@@ -13,5 +29,6 @@
     "Delivery Status Notification \\((Relay|Delay|Success)\\)",
     "^\\s*(Delivered|Relayed)\\s*:"
   ],
-  "MaxBodyCharacters": 5000
+  "MaxBodyCharacters": 5000,
+  "MaxMessageMB": 25
 }

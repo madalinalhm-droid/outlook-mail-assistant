@@ -1,5 +1,5 @@
 @echo off
-title Outlook Mail Assistant
+title Mail Assistant
 cd /d "%~dp0"
 
 if not exist "OutlookMailAssistant.ps1" (
@@ -15,14 +15,15 @@ if not exist "OutlookMailAssistant.ps1" (
 :menu
 cls
 echo ==========================================================
-echo   OUTLOOK MAIL ASSISTANT - all mailboxes in this profile
+echo   MAIL ASSISTANT - Outlook, Gmail, Yahoo, IMAP, .eml, Thunderbird
 echo ==========================================================
 echo.
 echo   1. Report of one day's e-mails (read only)
 echo   2. Print attachments (asks for each one)
 echo   3. Reply to e-mails (draft or send)
 echo   4. Open the reports folder
-echo   5. Demo report (fictitious e-mails, no Outlook needed)
+echo   5. Demo report (fictitious e-mails, no mailbox needed)
+echo   6. Set up mailboxes (Gmail, Yahoo, IMAP, .eml folder, Thunderbird)
 echo.
 echo   0. Exit
 echo.
@@ -34,6 +35,7 @@ if "%option%"=="2" goto print
 if "%option%"=="3" goto reply
 if "%option%"=="4" goto folder
 if "%option%"=="5" goto demo
+if "%option%"=="6" goto setup
 if "%option%"=="0" exit /b 0
 goto menu
 
@@ -61,6 +63,7 @@ goto menu
 cls
 echo Pick the e-mail number, then the reply. At the end:
 echo   D = save as draft   S = send now   C = cancel
+echo   (Gmail / Yahoo / IMAP drafts go to the Drafts folder of the mailbox)
 echo.
 powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0OutlookMailAssistant.ps1" reply
 echo.
@@ -70,6 +73,13 @@ goto menu
 :folder
 if not exist "Reports" mkdir "Reports"
 start "" "Reports"
+goto menu
+
+:setup
+cls
+powershell -NoProfile -ExecutionPolicy Bypass -File "%~dp0OutlookMailAssistant.ps1" setup
+echo.
+pause
 goto menu
 
 :demo
