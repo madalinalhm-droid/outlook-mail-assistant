@@ -1,0 +1,28 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tests (PowerShell 7)
+        shell: pwsh
+        run: ./tests/Run-Tests.ps1
+      - name: Tests (Windows PowerShell 5.1)
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: .\tests\Run-Tests.ps1
+      - name: PSScriptAnalyzer
+        shell: pwsh
+        run: |
+          $r = Invoke-ScriptAnalyzer -Path . -Recurse -Severity Error,Warning `
+               -ExcludeRule PSAvoidUsingWriteHost,PSUseShouldProcessForStateChangingFunctions,PSUseSingularNouns,PSAvoidUsingEmptyCatchBlock,PSUseUsingScopeModifierInNewRunspaces,PSUseBOMForUnicodeEncodedFile
+          $r | Format-Table -AutoSize
+          if ($r) { exit 1 }
