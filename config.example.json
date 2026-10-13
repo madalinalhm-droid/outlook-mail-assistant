@@ -1,0 +1,17 @@
+{
+  "_help": "Copy this file to config.json next to the script and edit it. Every setting is optional.",
+  "Signature": "Your Name / Department",
+  "Greeting": "Hello,",
+  "Closing": "Best regards,",
+  "Templates": {
+    "1": "Please send the missing document as soon as possible.",
+    "2": "We have received your documents. Thank you.",
+    "3": "The attached document is not readable. Please send it again."
+  },
+  "IgnoredSubjects": [
+    "Successful Mail Delivery Report",
+    "Delivery Status Notification \\((Relay|Delay|Success)\\)",
+    "^\\s*(Delivered|Relayed)\\s*:"
+  ],
+  "MaxBodyCharacters": 5000
+}

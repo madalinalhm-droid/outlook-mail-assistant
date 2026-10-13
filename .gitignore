@@ -1,0 +1,6 @@
+# personal settings and generated output – may contain real e-mail data
+config.json
+Reports/
+*.csv
+*.xlsx
+*.msg
